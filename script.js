@@ -1,9 +1,12 @@
+
 // get password everytime the user enters a character
 document.getElementById('password').addEventListener('keypress', () => {
     var pw = document.getElementById("password").value    
     console.log(pw)
+    checkPasswordInDataBreaches(pw);
     }
   );
+  
 
   function getCumulativeScore(){
     // call all password checking functions here
@@ -37,6 +40,43 @@ document.getElementById('password').addEventListener('keypress', () => {
       emoji.textContent = " 🤩"
     }
   }
+
+  const checkPasswordInDataBreaches = async (pw) => {
+    const shaObj = new jsSHA("SHA-1", "TEXT");
+    shaObj.update(pw);
+    const passhash = shaObj.getHash("HEX");
+  
+    console.log("pass hash: " + passhash);
+  
+    const link = `https://api.pwnedpasswords.com/range/` + passhash.slice(0, 5);
+  
+    try {
+      const response = await axios.get(link);
+      const hashes = {};
+      const rows = response.data.split('\n');
+  
+      for (const row of rows) {
+        const [hash, count] = row.split(':');
+        hashes[hash] = count;
+      }
+  
+      const hashsuffix = passhash.slice(5, 40).toUpperCase();
+      const found = hashes[hashsuffix];
+  
+      if (found) {
+        pwnedCard.querySelector('.card-title').textContent = 'Password in Data Breaches';
+        pwnedCard.querySelector('.card-text').textContent = `Your password has appeared ${found} times in data breaches before!`;
+        console.log(`Your password has appeared ${found} times in data breaches before!`);
+      } else {
+        pwnedCard.querySelector('.card-title').textContent = 'No Data Breach Found';
+        pwnedCard.querySelector('.card-text').textContent = 'Your password has not appeared in data breaches before!';
+      }
+    } catch (error) {
+      console.error("Error fetching data from Have I Been Pwned API:", error.message);
+    }
+  };
+  
+
 
   function getZXCVBNScore() {
     const passwordInput = document.getElementById('password');

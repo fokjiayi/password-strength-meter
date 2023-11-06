@@ -56,42 +56,44 @@ document.getElementById('password').addEventListener('keypress', () => {
     const penaltyWeight = 0.1; // Weight for penalty deduction
 
     // Define the minimum length requirement
-    const minLength = 4;
+    const minLength = 12; // More than 11 characters
 
     // Define the maximum score
     const maxScore = 100;
 
     let score = 0;
 
-    if (password.length >= minLength) {
-        // Calculate the score based on length
+    // Checks for the criteria to give a perfect score
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    // Checks for sequential patterns
+    const sequentialNumbers = /123|234|345|456|567|678|789|890/;
+    const sequentialLowercase = /abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz/;
+    const sequentialUppercase = /ABC|BCD|CDE|DEF|EFG|FGH|GHI|HIJ|IJK|JKL|KLM|LMN|MNO|NOP|OPQ|PQR|QRS|RST|STU|TUV|UVW|VWX|WXY|XYZ/;
+
+    if (
+        password.length >= minLength &&
+        hasLowercase &&
+        hasUppercase &&
+        hasSpecialChar &&
+        hasNumber &&
+        !sequentialNumbers.test(password) &&
+        !sequentialLowercase.test(password) &&
+        !sequentialUppercase.test(password)
+    ) {
+        score = maxScore;
+    } else {
+        // Calculate the score based on individual criteria
         const lengthScore = Math.min((password.length - minLength) / minLength, 1);
-
-        // Calculate the score based on lowercase letters
-        const lowercaseRegex = /[a-z]/;
-        const hasLowercase = lowercaseRegex.test(password);
         const lowercaseScore = hasLowercase ? 1 : 0;
-
-        // Calculate the score based on uppercase letters
-        const uppercaseRegex = /[A-Z]/;
-        const hasUppercase = uppercaseRegex.test(password);
         const uppercaseScore = hasUppercase ? 1 : 0;
-
-        // Calculate the score based on special characters
-        const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
-        const hasSpecialChar = specialCharRegex.test(password);
         const specialCharScore = hasSpecialChar ? 1 : 0;
-
-        // Calculate the score based on numbers
-        const numberRegex = /\d/;
-        const hasNumber = numberRegex.test(password);
         const numberScore = hasNumber ? 1 : 0;
 
-        // Check for sequential characters and apply penalty
-        const sequentialNumbers = /123|234|345|456|567|678|789|890/;
-        const sequentialLowercase = /abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz/;
-        const sequentialUppercase = /ABC|BCD|CDE|DEF|EFG|FGH|GHI|HIJ|IJK|JKL|KLM|LMN|MNO|NOP|OPQ|PQR|QRS|RST|STU|TUV|UVW|VWX|WXY|XYZ/;
-
+        // Calculate the penalty based on sequential patterns
         const penalty = 
             (sequentialNumbers.test(password) ? 1 : 0) +
             (sequentialLowercase.test(password) ? 1 : 0) +

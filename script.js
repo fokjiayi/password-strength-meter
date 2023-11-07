@@ -87,11 +87,44 @@ document.getElementById('password').addEventListener('keypress', () => {
         score = maxScore;
     } else {
         // Calculate the score based on individual criteria
-        const lengthScore = Math.min((password.length - minLength) / minLength, 1);
-        const lowercaseScore = hasLowercase ? 1 : 0;
-        const uppercaseScore = hasUppercase ? 1 : 0;
-        const specialCharScore = hasSpecialChar ? 1 : 0;
-        const numberScore = hasNumber ? 1 : 0;
+        const lengthScore= 0;
+        const lowercaseScore = 0
+        const uppercaseScore = 0
+        const specialCharScore = 0    
+        const numberScore = 0
+        
+      
+      // appear feedback if the password input is not 0 and everytime the input number changes
+
+
+      // display the what has not been achieved
+      // display what hsa been achieved according to the changes in input
+      // if the input has been achieved, change the text
+
+      if (password.length >= minLength) {
+          document.querySelector('#length').innerHTML = '<p id="length" style="color:limegreen;">Password length is achieved.</p>';
+      }
+      
+      if (hasLowercase) {
+          document.querySelector('#lowercase').innerHTML = '<p id="lowercase" "color:limegreen;">Lowercase letters are present.</p>';
+          uppercaseScore = 1
+      }
+      
+      if (hasUppercase) {
+          document.querySelector('#uppercase').innerHTML = '<p id="uppercase" "color:limegreen;">Uppercase letters are present.</p>';
+          uppercaseScore = 1
+
+      }
+      
+      if (hasSpecialChar) {
+          document.querySelector('#specialchar').innerHTML = '<p id="specialchar" "color:limegreen;">Special characters are present.</p>';
+          specialCharScore = 1
+      }
+      
+      if (hasNumber) {
+          document.querySelector('#number').innerHTML = '<p id="number" "color:limegreen;">Numbers are present.</p>';
+          numberScore = 1
+      }
 
         // Calculate the penalty based on sequential patterns
         const penalty = 
@@ -200,3 +233,6 @@ document.getElementById('password').addEventListener('keypress', () => {
     percentageScore = ((result.score+1) / 5) * 100
     return percentageScore
   }
+
+
+  

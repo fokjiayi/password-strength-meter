@@ -73,7 +73,7 @@ document.getElementById('password').addEventListener('keypress', () => {
     const sequentialNumbers = /123|234|345|456|567|678|789|890/;
     const sequentialLowercase = /abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz/;
     const sequentialUppercase = /ABC|BCD|CDE|DEF|EFG|FGH|GHI|HIJ|IJK|JKL|KLM|LMN|MNO|NOP|OPQ|PQR|QRS|RST|STU|TUV|UVW|VWX|WXY|XYZ/;
-
+    
     if (
         password.length >= minLength &&
         hasLowercase &&
@@ -87,44 +87,69 @@ document.getElementById('password').addEventListener('keypress', () => {
         score = maxScore;
     } else {
         // Calculate the score based on individual criteria
-        const lengthScore= 0;
-        const lowercaseScore = 0
-        const uppercaseScore = 0
-        const specialCharScore = 0    
-        const numberScore = 0
+        // const lengthScore= 0;
         
-      
+        // const uppercaseScore = 0
+        // const specialCharScore = 0    
+        // const numberScore = 0
+        
+
       // appear feedback if the password input is not 0 and everytime the input number changes
-
-
       // display the what has not been achieved
       // display what hsa been achieved according to the changes in input
       // if the input has been achieved, change the text
+      if(password.length != 0){
+        
+        if (password.length >= minLength) {
+          const lengthScore= 1;
+          document.querySelector('#length').innerHTML = '<p id="length" style="color:green;">Password length is achieved.</p>';
+      }
+      else{
+        document.querySelector('#length').innerHTML = '<p id="length" style="color:red;">Password length needs to be a at least 12 characters.</p>';
+        const lengthScore= 0;
+      }
 
-      if (password.length >= minLength) {
-          document.querySelector('#length').innerHTML = '<p id="length" style="color:limegreen;">Password length is achieved.</p>';
+        if (hasLowercase) {
+          document.querySelector('#lowercase').innerHTML = '<p id="length" style="color:green;">Password has lower case characters.</p>';
+          const lowercaseScore = 1
+        }
+        else{
+          document.querySelector('#lowercase').innerHTML = '<p id="length" style="color:red;">Password needs to have lower case characters.</p>';
+          const lowercaseScore = 0
+        }
+
+        if (hasUppercase) {
+          document.querySelector('#uppercase').innerHTML = '<p id="length" style="color:green;">Password has upper case characters.</p>';
+          const uppercaseScore = 1
+        }
+        else{
+          document.querySelector('#uppercase').innerHTML = '<p id="length" style="color:red;">Password  needs to have upper case characters</p>';
+          const uppercaseScore = 0
+        }
+
+        if (hasSpecialChar) {
+          document.querySelector('#specialchar').innerHTML = '<p id="length" style="color:green;">Password has special characters.</p>';
+          const specialCharScore = 1    
+        }
+        else{
+          document.querySelector('#specialchar').innerHTML = '<p id="length" style="color:red;">Password needs to have special characters (e.g. !@#$%^&*()_...) </p>';
+          const specialCharScore = 0    
+        }
+
+        if (hasNumber) {
+          document.querySelector('#number').innerHTML = '<p id="length" style="color:green;">Password has numerical values.</p>';
+          const numberScore = 1
+        }
+        else{
+          document.querySelector('#number').innerHTML = '<p id="length" style="color:red;">Password needs to have numerical values.</p>';
+          const numberScore = 0  
       }
       
-      if (hasLowercase) {
-          document.querySelector('#lowercase').innerHTML = '<p id="lowercase" "color:limegreen;">Lowercase letters are present.</p>';
-          uppercaseScore = 1
-      }
-      
-      if (hasUppercase) {
-          document.querySelector('#uppercase').innerHTML = '<p id="uppercase" "color:limegreen;">Uppercase letters are present.</p>';
-          uppercaseScore = 1
 
       }
       
-      if (hasSpecialChar) {
-          document.querySelector('#specialchar').innerHTML = '<p id="specialchar" "color:limegreen;">Special characters are present.</p>';
-          specialCharScore = 1
-      }
+
       
-      if (hasNumber) {
-          document.querySelector('#number').innerHTML = '<p id="number" "color:limegreen;">Numbers are present.</p>';
-          numberScore = 1
-      }
 
         // Calculate the penalty based on sequential patterns
         const penalty = 

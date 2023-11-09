@@ -2,40 +2,6 @@ body{
     padding: 3em;
     text-align: center;
 }
-
-
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  #strength-meter {
-    margin-top: 20px;
-  }
-  
-  #strength-bar {
-    width: 100%;
-  }
-  
-  #strength-text {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  #suggestions {
-    margin-top: 20px;
-    font-weight: bold;
-  } */
+#pwlength-achieved p{
+  font-size: 16px;
+}

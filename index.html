@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="background-image: url('blue.jpg'); background-size: cover;">
-  <div class="user-input d-flex flex-column justify-content-center p-5">
+  <div class="user-input d-flex flex-column justify-content-center pb-3">
       <h1 class="pb-3" style="color: white;">Password strength checker</h1>
-      <!-- <input id="password" class="p-3 rounded" type="password" placeholder="Enter your password here" "> -->
       <div class="input-group">
         <input id="password" type="password" class="p-3 form-control" placeholder="Enter your password here" oninput="getCumulativeScore()">
         <div class="input-group-append">
@@ -19,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="row row-cols-3 row-cols-md-1 g-4 mb-4">
+    <div class="row row-cols-1 row-cols-md-1 g-4 mb-4">
         <div class="col" id="pwnedCard">
             <div class="col card h-100">
                 <div class="card-body">
@@ -29,7 +28,7 @@
             </div>
           </div>
         </div>
-    <div class="row row-cols-3 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
       <div class="col">
         <div class="col card h-100">
             <div class="card-body">

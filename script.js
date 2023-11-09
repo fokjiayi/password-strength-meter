@@ -6,6 +6,19 @@ document.getElementById('password').addEventListener('keypress', () => {
     checkPasswordInDataBreaches(pw);
     }
   );
+
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const passwordToggleBtn = document.getElementById('passwordToggle');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      passwordToggleBtn.innerHTML = '<i class="bi bi-eye-fill"></i>';
+    } else {
+      passwordInput.type = 'password';
+      passwordToggleBtn.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+    }
+  }
   
 
   function getCumulativeScore(){
